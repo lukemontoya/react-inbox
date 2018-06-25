@@ -127,6 +127,22 @@ class App extends Component {
     this.setState({ messages: newState })
   }
 
+  addLabel = (label) => {
+    let newState = this.state.messages.map(msg => {
+      if(msg.selected && !msg.labels.includes(label)) msg.labels.push(label)
+      return msg
+    })
+    this.setState({ messages: newState })
+  }
+
+  removeLabel = (label) => {
+    let newState = this.state.messages.map(msg => {
+      if(msg.selected) msg.labels = msg.labels.filter(l => l  !== label)
+      return msg
+    })
+    this.setState({ messages: newState })
+  }
+
   render() {
     let numOfSelectecMsgs = this.state.messages.filter(msg => msg.selected).length;
     return (
@@ -139,6 +155,8 @@ class App extends Component {
           setUnreadFunc={ this.setUnreadFunc }
           setReadFunc={ this.setReadFunc }
           deleteMessages={ this.deleteMessages }
+          addLabel={ this.addLabel }
+          removeLabel={ this.removeLabel }
         />
         <MessageList
           messages={ this.state.messages }
