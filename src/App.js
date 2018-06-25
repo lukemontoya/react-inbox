@@ -91,7 +91,7 @@ class App extends Component {
   }
 
   selectButtonFunc = (type) => {
-    let messagesStateCopy = this.toolbarCopyCurrentState();
+    let messagesStateCopy = [...this.state.messages];
     if (type.includes('check')) {
       messagesStateCopy = this.state.messages.map(message => {
         message.selected =false;
